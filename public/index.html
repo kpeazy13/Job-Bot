@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Launchpad · Internship Agent</title>
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <div id="login" class="login">
+      <div class="brand-mark">↗</div>
+      <p class="eyebrow">YOUR NEXT CHAPTER</p>
+      <h1>Welcome to Launchpad.</h1>
+      <p>Your internships. Your experience. Your final say.</p>
+      <form id="login-form">
+        <label
+          >Local access token<input
+            name="token"
+            type="password"
+            required
+            autocomplete="current-password"
+            placeholder="Paste the token from your terminal" /></label
+        ><button>Unlock workspace <span>→</span></button>
+      </form>
+      <p class="muted">A private workspace running on your computer.</p>
+    </div>
+    <div id="workspace" hidden>
+      <aside>
+        <a class="brand" href="#overview"
+          ><span class="brand-mark">↗</span> Launchpad</a
+        >
+        <p class="workspace-label">PERSONAL WORKSPACE</p>
+        <nav>
+          <button data-view="overview" class="active">
+            ◫ <span>Overview</span></button
+          ><button data-view="applications">▤ <span>Applications</span></button
+          ><button data-view="sources">⌕ <span>Job discovery</span></button
+          ><button data-view="reviews">
+            ◉ <span>Review inbox</span
+            ><small id="review-count">0</small></button
+          ><button data-view="profile">◇ <span>Profile & evidence</span></button
+          ><button data-view="resume">▧ <span>Résumé studio</span></button
+          ><button data-view="activity">↺ <span>Activity log</span></button>
+        </nav>
+        <div class="aside-bottom">
+          <div class="local-status"><i></i> Local-first workspace</div>
+          <p>
+            Your facts stay yours.<br />Every submission needs your approval.
+          </p>
+          <button id="logout" class="text-button">Lock workspace ↗</button>
+        </div>
+      </aside>
+      <div class="main-shell">
+        <header>
+          <div>
+            <span class="breadcrumb">Workspace</span><span class="slash">/</span
+            ><span id="page-name">Overview</span>
+          </div>
+          <div class="header-actions">
+            <span id="worker-status" class="status-pill">Paused</span
+            ><button id="toggle-worker" class="secondary">Resume agent</button
+            ><button id="add-job">+ Add opportunity</button>
+          </div>
+        </header>
+        <main id="content"></main>
+        <footer>
+          <span>Thoughtful applications. Meaningful opportunities.</span
+          ><button id="kill" class="text-button">Stop browser</button
+          ><a href="/api/export">Export data ↗</a>
+        </footer>
+      </div>
+    </div>
+    <dialog id="job-dialog">
+      <div class="dialog-heading">
+        <h2>Add an opportunity</h2>
+        <button
+          type="button"
+          id="close-dialog"
+          class="icon-button"
+          aria-label="Close dialog"
+        >
+          ×
+        </button>
+      </div>
+      <p class="muted">Paste a posting to create a tailored application.</p>
+      <form id="job-form">
+        <div class="form-grid">
+          <label
+            >Company<input
+              name="company"
+              required
+              placeholder="Company name" /></label
+          ><label
+            >Role title<input
+              name="title"
+              required
+              placeholder="Software Engineering Intern" /></label
+          ><label
+            >Location<input
+              name="location"
+              placeholder="Austin, TX / Remote" /></label
+          ><label
+            >Requisition ID<input
+              name="requisition"
+              placeholder="Optional, helps prevent duplicates"
+          /></label>
+        </div>
+        <label
+          >Posting URL<input
+            name="url"
+            type="url"
+            required
+            placeholder="https://company.com/careers/role" /></label
+        ><label
+          >Job description<textarea
+            name="description"
+            rows="6"
+            minlength="20"
+            required
+            placeholder="Paste the full description and requirements…"
+          ></textarea></label
+        ><label
+          >Workflow<select name="adapter">
+            <option value="manual">Manual portal · résumé preparation</option>
+            <option value="test">
+              Local test portal · no employer submission
+            </option>
+          </select></label
+        >
+        <p class="muted" id="test-url-hint"></p>
+        <button>Create application →</button>
+      </form>
+    </dialog>
+    <div id="toast" role="status" hidden></div>
+  </body>
+</html>
